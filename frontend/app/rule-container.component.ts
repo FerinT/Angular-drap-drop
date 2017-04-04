@@ -1,4 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { Ng2DragDropModule } from "ng2-drag-drop";
+import { RuleCriteria } from "./rule-criteria";
 
 @Component({
 
@@ -21,20 +23,32 @@ import { Component } from '@angular/core'
         </table>
         
 
-   <div class="col-sm-7">
-    <div class="panel panel-default" droppable (onDrop)="onItemDrop($event)">
-        <div class="panel-heading">Drop Items here</div>
-            <div class="panel-body">
-                <li *ngFor="let item of droppedItems" class="list-group-item">{{item.name}}</li>
+    <div class="col-sm-7">
+        <div class="panel panel-default" droppable (onDrop)="onItemDrop($event)">
+        <br>
+            <b><i><div class="panel-heading">Criteria to be met in order to save to this account</div></i></b>
+                <div class="panel-body">
+                    <li draggable *ngFor="let criteria of ruleCriteria" [dragData]="criteria" class="list-group-item">{{criteria.field}} {{criteria.evaluator}} {{criteria.value}} </li>
+                </div>
             </div>
         </div>
-    </div>
 
 
     </div>
-
+    <br>
+     
     `
 })
 
-export class RuleContainer {}
+export class RuleContainer {
+    ruleCriteria: RuleCriteria[] = [];
+ 
+     onItemDrop(e: any) {
+        // Get the dropped data here
+        this.ruleCriteria.push(e.dragData);
+    }
+
+    
+    
+}
 

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { RuleCriteria } from "./rule-criteria"
+import { RuleCriteriaService } from "./rule-criteria.service"
 
 @Component({
 
@@ -46,21 +48,54 @@ import { Component } from '@angular/core'
                 <tr>
             </table>
 
-    <div class="col-sm-3">
+    <div class="col-sm-9">
         <ul class="list-group">
-            <li draggable *ngFor="let criteria of rulecriteria" [dragData]="criteria" class="list-group-item">{{criteria.evaluator}}</li>
+            <li draggable *ngFor="let criteria of ruleCriteria" [dragData]="criteria" class="list-group-item">{{criteria.field}} {{criteria.evaluator}} {{criteria.value}} </li>
         </ul>
+    </div>
+
+    <div class="col-sm-9">
+    <div class="panel panel-default" droppable (onDrop)="onItemDrop($event)">
+    <br>
+        <div class="panel-heading">Use these later</div>
+            <div class="panel-body">
+                <li draggable *ngFor="let criteria of ruleCriteriaLaterUse" [dragData]="criteria" class="list-group-item">{{criteria.field}} {{criteria.evaluator}} {{criteria.value}} </li>
+            </div>
+        </div>
     </div>
 
 
         </form>
     </div>
 
-    `
+    `,
+    providers: [RuleCriteriaService]
 })
 
-export class CreateRuleComponent {
+export class CreateRuleComponent implements OnInit {
 
+    ruleCriteria: RuleCriteria[];
+
+    constructor(private ruleCriteriaService: RuleCriteriaService){}
+
+
+    ruleCriteriaLaterUse: RuleCriteria[] = [];
+
+     onItemDrop(e: any) {
+             console.log('in drop item');
+        // Get the dropped data here
+        this.ruleCriteriaLaterUse.push(e.dragData);
+    }
+
+
+
+    getRuleCriteria(): void {
+        this.ruleCriteriaService.getCriteria().then(ruleCriteria => this.ruleCriteria = ruleCriteria);
+    }
+
+    ngOnInit(): void{
+        this.getRuleCriteria();
+    }
 
     
 }

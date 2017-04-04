@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var create_rules_component_1 = require("./create-rules.component");
 var rule_container_component_1 = require("./rule-container.component");
+var rule_stack_component_1 = require("./rule-stack.component");
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var ng2_drag_drop_1 = require("ng2-drag-drop");
@@ -19,8 +20,8 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, ng2_drag_drop_1.Ng2DragDropModule],
-            declarations: [create_rules_component_1.CreateRuleComponent, rule_container_component_1.RuleContainer],
-            bootstrap: [create_rules_component_1.CreateRuleComponent, rule_container_component_1.RuleContainer]
+            declarations: [create_rules_component_1.CreateRuleComponent, rule_stack_component_1.RuleStackComponent, rule_container_component_1.RuleContainer],
+            bootstrap: [create_rules_component_1.CreateRuleComponent, rule_stack_component_1.RuleStackComponent, rule_container_component_1.RuleContainer]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

@@ -6,8 +6,8 @@ import { RuleCriteria } from "./rule-criteria"
 @Injectable()
 export class RuleCriteriaService {
 
-    getCriteria(): RuleCriteria[] {
-        return CRITERIA;
+    getCriteria(): Promise<RuleCriteria[]> {
+        return Promise.resolve(CRITERIA);
     }
 
 }

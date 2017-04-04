@@ -14,7 +14,7 @@ var RuleCriteriaService = (function () {
     function RuleCriteriaService() {
     }
     RuleCriteriaService.prototype.getCriteria = function () {
-        return mock_criteria_1.CRITERIA;
+        return Promise.resolve(mock_criteria_1.CRITERIA);
     };
     RuleCriteriaService = __decorate([
         core_1.Injectable(), 
